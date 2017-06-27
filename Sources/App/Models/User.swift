@@ -64,6 +64,16 @@ extension User: Preparation {
 // MARK: JSON serialization/deserialization
 
 extension User: JSONRepresentable {
+  convenience init(json: JSON) throws {
+    try self.init(
+      userName: json.get(Keys.userName),
+      email: json.get(Keys.email),
+      password: json.get(Keys.password),
+      firstName: json.get(Keys.firstName),
+      lastName: json.get(Keys.lastName)
+    )
+  }
+  
   func makeJSON() throws -> JSON {
     var json = JSON()
     try json.set(Keys.id, id)

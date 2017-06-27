@@ -9,7 +9,7 @@ extension Droplet {
   }
   
   private func setupUnprotectedRoutes() throws {
-    // nothing here for now
+    try resource("signup", SignupController.self)
   }
   
   private func setupPasswordProtectedRoutes() throws {
