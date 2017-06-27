@@ -7,9 +7,9 @@ final class AuthToken: Model {
   let userId: Identifier
   let token: String
   
-  init(userId: Identifier) {
+  init(user: User) throws {
+    self.userId = try user.assertExists()
     self.token = UUID().uuidString
-    self.userId = userId
   }
   
   var user: Parent<AuthToken, User> {
@@ -32,8 +32,8 @@ final class AuthToken: Model {
 extension AuthToken {
   struct Keys {
     static let id = "id"
-    static let userId = "userId"
     static let token = "token"
+    static let userId = User.foreignIdKey
   }
 }
 

@@ -5,6 +5,7 @@ import FluentProvider
 final class SignupController {
   
   /// POST /signup
+  /// returns token
   func create(request: Request) throws -> ResponseRepresentable {
     
     guard let json = request.json else {
@@ -23,7 +24,8 @@ final class SignupController {
       throw Abort.unauthorized
     }
     
-    let token = AuthToken(userId: user.id!)
+    let token = try AuthToken(user: user)
+    try token.save()
     return token
   }
 }
