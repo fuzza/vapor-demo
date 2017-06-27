@@ -3,7 +3,6 @@ import FluentProvider
 import AuthProvider
 
 final class User: Model {
-  
   let storage = Storage()
   
   var userName: String
@@ -43,16 +42,7 @@ final class User: Model {
   }
 }
 
-extension User {
-  struct Keys {
-    static let id = "id"
-    static let email = "email"
-    static let userName = "userName"
-    static let firstName = "firstName"
-    static let lastName = "lastName"
-    static let password = "password"
-  }
-}
+// MARK: Database preparation
 
 extension User: Preparation {
   static func prepare(_ database: Database) throws {
@@ -71,6 +61,8 @@ extension User: Preparation {
   }
 }
 
+// MARK: JSON serialization/deserialization
+
 extension User: JSONRepresentable {
   func makeJSON() throws -> JSON {
     var json = JSON()
@@ -85,9 +77,34 @@ extension User: JSONRepresentable {
 
 extension User: ResponseRepresentable { }
 
+// MARK: Token authentication
+
 extension User: TokenAuthenticatable {
   typealias TokenType = AuthToken
 }
+
+// MARK: Password authentication
+
+extension User: PasswordAuthenticatable {
+  static var usernameKey: String {
+    return Keys.userName
+  }
+}
+
+// MARK: Keypaths helpers
+
+extension User {
+  struct Keys {
+    static let id = "id"
+    static let email = "email"
+    static let userName = "userName"
+    static let firstName = "firstName"
+    static let lastName = "lastName"
+    static let password = "password"
+  }
+}
+
+// MARK: Helpers
 
 class UserPrefill: Preparation {
   static func prepare(_ database: Database) throws {
@@ -101,5 +118,3 @@ class UserPrefill: Preparation {
     // do nothing
   }
 }
-
-
