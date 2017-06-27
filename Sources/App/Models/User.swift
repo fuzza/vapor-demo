@@ -1,5 +1,6 @@
 import Vapor
 import FluentProvider
+import AuthProvider
 
 final class User: Model {
   
@@ -84,6 +85,10 @@ extension User: JSONRepresentable {
 
 extension User: ResponseRepresentable { }
 
+extension User: TokenAuthenticatable {
+  typealias TokenType = AuthToken
+}
+
 class UserPrefill: Preparation {
   static func prepare(_ database: Database) throws {
     let user = User.init(userName: "alfa",
@@ -96,4 +101,5 @@ class UserPrefill: Preparation {
     // do nothing
   }
 }
+
 
