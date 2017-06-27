@@ -113,18 +113,3 @@ extension User {
     static let password = "password"
   }
 }
-
-// MARK: Helpers
-
-class UserPrefill: Preparation {
-  static func prepare(_ database: Database) throws {
-    let user = User.init(userName: "alfa",
-                         email: "alfa@ciklum.com",
-                         password: "12345678")
-    try user.save()
-  }
-  
-  static func revert(_ database: Database) throws {
-    // do nothing
-  }
-}
