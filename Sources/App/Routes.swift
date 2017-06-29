@@ -3,6 +3,7 @@ import AuthProvider
 
 public enum Resources: String {
   case login
+  case logout
   case signup
   case users
 }
@@ -28,5 +29,6 @@ extension Droplet {
     let tokenMiddleware = TokenAuthenticationMiddleware(User.self)
     let tokenGroup = self.grouped(tokenMiddleware)
     try tokenGroup.resource(Resources.users.rawValue, UsersController.self)
+    try tokenGroup.resource(Resources.logout.rawValue, LogoutController.self)
   }
 }
