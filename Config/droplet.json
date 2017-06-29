@@ -31,6 +31,7 @@
     "//": "file: Catches 404 errors and checks for files in the Public/ folder",
     "middleware": [
         "error",
+        "validation",
         "date",
         "file"
     ],

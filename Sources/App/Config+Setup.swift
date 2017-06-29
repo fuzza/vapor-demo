@@ -1,5 +1,6 @@
 import AuthProvider
 import FluentProvider
+import VaporValidation
 
 extension Config {
   public func setup() throws {
@@ -12,6 +13,7 @@ extension Config {
   private func setupProviders() throws {
     try addProvider(AuthProvider.Provider.self)
     try addProvider(FluentProvider.Provider.self)
+    try addProvider(VaporValidation.Provider.self)
   }
   
   private func setupPreparations() throws {

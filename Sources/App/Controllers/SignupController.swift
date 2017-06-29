@@ -2,6 +2,7 @@ import Vapor
 import HTTP
 import AuthProvider
 import FluentProvider
+import VaporValidation
 
 final class SignupController {
   /// POST /signup
@@ -10,6 +11,8 @@ final class SignupController {
     guard let json = request.json else {
       throw Abort.badRequest
     }
+    
+    try json[User.Keys.email]?.string?.validated(by: EmailValidator())
     
     let user = try User(json: json)
     try user.save()
