@@ -4,6 +4,8 @@ import AuthProvider
 import FluentProvider
 
 final class LogoutController {
+  /// POST /logout
+  /// invalidates and removes token from database
   func create(request: Request) throws -> ResponseRepresentable {
     guard let header = request.auth.header?.string, let range = header.range(of: "Bearer ") else {
       throw Abort.unauthorized
