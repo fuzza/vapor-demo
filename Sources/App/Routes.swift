@@ -6,6 +6,7 @@ public enum Resources: String {
   case logout
   case signup
   case users
+  case tasks
 }
 
 extension Droplet {
@@ -30,5 +31,6 @@ extension Droplet {
     let tokenGroup = self.grouped(tokenMiddleware)
     try tokenGroup.resource(Resources.users.rawValue, UsersController.self)
     try tokenGroup.resource(Resources.logout.rawValue, LogoutController.self)
+    try tokenGroup.resource(Resources.tasks.rawValue, TasksController.self)
   }
 }

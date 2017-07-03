@@ -19,5 +19,6 @@ extension Config {
   private func setupPreparations() throws {
     preparations.append(User.self)
     preparations.append(AuthToken.self)
+    preparations.append(Task.self)
   }
 }

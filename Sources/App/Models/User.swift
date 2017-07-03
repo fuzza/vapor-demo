@@ -63,7 +63,7 @@ extension User: Preparation {
 
 // MARK: JSON serialization/deserialization
 
-extension User: JSONRepresentable {
+extension User: JSONConvertible {
   convenience init(json: JSON) throws {
     try self.init(
       userName: json.get(Keys.userName),
